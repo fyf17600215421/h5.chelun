@@ -1,0 +1,194 @@
+    .ask-min-price {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        background: #fff;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+        z-index: 78;
+    }
+    
+    .ask-min-price header {
+        height: .3rem;
+        line-height: .3rem;
+        width: 100%;
+        background: #79cd92;
+        text-align: center;
+        z-index: 99;
+    }
+    
+    .ask-min-price header p {
+        color: #fff;
+        font-size: .15rem;
+        display: inline-block;
+    }
+    
+    .ask-min-price .content {
+        -webkit-box-flex: 1;
+        flex: 1;
+        width: 100%;
+        height: auto;
+        background: #f4f4f4;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .q-info {
+        display: flex;
+        background: #fff;
+        padding: .16rem .09rem .12rem;
+        position: relative;
+        height: 1rem;
+        box-sizing: border-box;
+    }
+    
+    .q-info img {
+        width: 1.15rem;
+        height: .7rem;
+        border: 1px solid #eee;
+        box-sizing: border-box;
+        border-radius: 5px;
+    }
+    
+    .flex-column {
+        margin-left: .2rem;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-orient: vertical;
+        flex-direction: column;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-direction: normal;
+    }
+    
+    .flex-column p:first-child {
+        font-size: .18rem;
+        margin-top: -.1rem;
+    }
+    
+    .flex-column p:nth-child(2) {
+        font-size: .18rem;
+        line-height: 1;
+        margin-top: .1rem;
+    }
+    
+    .self-info .tip {
+        padding: 0 .1rem;
+        height: .3rem;
+        line-height: .3rem;
+        font-size: .12rem;
+        color: #666;
+        background: #eee;
+    }
+    
+    .self-info ul {
+        background: #fff;
+        padding: 0 .1rem;
+    }
+    
+    .self-info ul li {
+        font-size: .16rem;
+        height: .44rem;
+        line-height: .44rem;
+        border-bottom: 1px solid #eee;
+        box-sizing: border-box;
+        color: #000;
+    }
+    
+    .self-info ul li input {
+        font-size: .16rem;
+        padding-right: .1rem;
+        width: 88%;
+        text-align: right;
+        box-sizing: border-box;
+        color: #555;
+        border: none;
+        background: none;
+    }
+    
+    .quotation {
+        background: #fff;
+        text-align: center;
+        padding-top: .3rem;
+        padding-bottom: .28rem;
+    }
+    
+    .quotation button {
+        border: none;
+        background: none;
+        font-size: .16rem;
+        color: #fff;
+        width: 80%;
+        background: #3aacff;
+        height: .35rem;
+        border-radius: .05rem;
+    }
+    
+    .dealer-info .tip {
+        padding: 0 .1rem;
+        height: .3rem;
+        line-height: .3rem;
+        font-size: .12rem;
+        color: #666;
+        background: #eee;
+    }
+    
+    .dealer-info ul {
+        background: #fff;
+        padding: 0 .18rem;
+    }
+    
+    .dealer-info ul li {
+        position: relative;
+        padding: .13rem 0 .13rem .27rem;
+        border-bottom: 1px solid #eee;
+        box-sizing: border-box;
+        height: .825rem;
+    }
+    
+    .dealer-info li:before {
+        content: "";
+        display: inline-block;
+        width: .18rem;
+        height: .18rem;
+        border-radius: 50%;
+        border: 2px solid #ccc;
+        box-sizing: border-box;
+        position: absolute;
+        left: .02rem;
+        top: 50%;
+        -webkit-transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -50%, 0);
+    }
+    
+    .dealer-info ul li p:first-child {
+        font-size: .16rem;
+    }
+    
+    .dealer-info li p:nth-child(2) {
+        margin-top: .08rem;
+        font-size: .12rem;
+        color: #a2a2a2;
+    }
+    
+    .dealer-info li p:first-child span:last-child {
+        font-size: .16rem;
+        float: right;
+        color: red;
+    }
+    
+    .dealer-info li p:nth-child(2) span:first-child {
+        display: inline-block;
+        max-width: 4.6rem;
+    }
+    
+    .dealer-info li p:nth-child(2) span:nth-child(2) {
+        float: right;
+    }
