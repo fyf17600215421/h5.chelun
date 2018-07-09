@@ -17,7 +17,6 @@
          <Rightnav :list="rightList" ></Rightnav>
          <RightDialog></RightDialog>
         </div>
-        <router-view/>
    </div>
 </template>
 <script>
@@ -60,6 +59,9 @@ export default {
         that.$refs.indexMain.scrollTo(0,0) :
         that.$refs.indexMain.scrollTo(0,that.$refs[indexList][0].offsetTop);
        }
+    },
+    destroyed() {
+        this.rightListDialogShowChange(true);
     },
     components:{
         Rightnav,

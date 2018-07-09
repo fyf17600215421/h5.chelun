@@ -1,8 +1,22 @@
 <template>
     <div class="car-content-img">
        <div class="flex-row tit">
-           <span>颜色</span>
-           <span>车款</span>
+            <span>
+                <router-link to="color">
+                    color
+                </router-link>
+           </span>
+            <span>
+                 <router-link to="type">
+                    Type
+                </router-link>
+           </span>
+          
+       </div>
+       <div v-if="list.length===0">
+           <h1>
+               无此颜色的车
+           </h1>
        </div>
         <ul class="img-default" v-for="(item,index) in list" :key="index">
                <li v-for="(value,key) in item.List" :key="key" v-if="key==0">
@@ -55,14 +69,20 @@ export default {
         Imgswiper
     },
     mounted(){
+        console.log(this.SerialID,this.ColorID);
         this.changeSerialID(this.$route.query.id);
         let time = new Date().getTime();
-        this.getList("https://baojia.chelun.com/v2-car-getImageList.html?SerialID="+this.SerialID+"&_"+time+"","list");
+        let Url ="https://baojia.chelun.com/v2-car-getImageList.html?SerialID="+this.SerialID+"&_"+time+"";
+        if(this.ColorID){
+         Url ="https://baojia.chelun.com/v2-car-getImageList.html?SerialID="+this.SerialID+"&ColorID="+this.ColorID+"&_"+time+"";
+          }
+        this.getList(Url,"list");
     },
     computed:{
        ...mapState({
            SerialID:state=>state.CarImg.SerialID,
-           ImageID:state=>state.CarImg.ImageID
+           ImageID:state=>state.CarImg.ImageID,
+           ColorID:state=>state.CarImg.ColorID
        })
     },
     watch:{
@@ -74,7 +94,7 @@ export default {
         }
     },
     methods:{
-        ...mapMutations(["changeSerialID","changeImageID","changePageCount"]),
+        ...mapMutations(["changeSerialID","changeImageID","changePageCount","changeColorID"]),
         //获取数据
         getList(URL,content){
             fetch(URL).then(res=>{
@@ -101,11 +121,13 @@ export default {
             this.key=false;
             let time = new Date().getTime();
             let URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${i}&PageSize=30&_${time}`
+            if(this.ColorID){
+                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ColorID=${this.ColorID}&ImageID=${this.ImageID}&Page=${i}&PageSize=30&_${time}`
+            }
             this.getList(URL,"moneyImgList")
         },
         //触发下拉加载更多
         loadingmore(moneyImgList){
-           
            let target = event.target; 
            if(this.key&&target.children.length/3*135-736-target.scrollTop<100&&this.moneyImgList.length<this.maxLength){
                this.getMoneyImgList(undefined,this.IMGpage+=1);
@@ -117,7 +139,10 @@ export default {
              this.changeImageID(id);
             this.showSwiper={show:true,index}
         }
-    }
+    },
+    destroyed() {
+        this.changeColorID(0)
+    },
 }
 </script>
 

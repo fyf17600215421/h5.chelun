@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import createdLooger from "vuex/dist/logger";
 Vue.use(Vuex);
 
 const modulesIndex = {
@@ -27,9 +28,10 @@ const modulesIndex = {
 
 const modulesImg = {
     state: {
-        SerialID: "000",
-        ImageID: null,
-        PageCount: 0
+        SerialID: 0,
+        ImageID: 0,
+        PageCount: 0,
+        ColorID: 0
     },
     mutations: {
         changeSerialID: (state, text) => {
@@ -40,6 +42,9 @@ const modulesImg = {
         },
         changePageCount: (state, text) => {
             state.PageCount = text;
+        },
+        changeColorID: (state, text) => {
+            state.ColorID = text;
         }
     }
 }
@@ -63,5 +68,6 @@ export default new Vuex.Store({
         Index: modulesIndex,
         CarImg: modulesImg,
         AskMinPrice: modulesAskMinPrice
-    }
+    },
+    plugins: [createdLooger()]
 })

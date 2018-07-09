@@ -72,7 +72,7 @@ import { mapState , mapMutations } from "vuex";
                 dom.ontouchend=(e)=>{
                  end=e.changedTouches[0].pageX;
                     if(end-start>=100){
-                     this.rightListDialogShowChange(true);
+                       this.rightListDialogShowChange(true);
                     }
                 }
             }

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Index>
+    <router-view>
        <h3 class="loading">loading........</h3>
-    </Index>
+    </router-view>
   </div>
 </template>
 

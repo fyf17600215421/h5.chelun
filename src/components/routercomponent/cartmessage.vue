@@ -124,6 +124,8 @@ export default {
                  shopCarList.push(obj);
             })
            this.shopCarList=shopCarList;  
+           localStorage.shopCarList=JSON.stringify(this.shopCarList);
+           localStorage.yearList=JSON.stringify(this.years);
         }
     }
 }

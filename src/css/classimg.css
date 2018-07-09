@@ -1,0 +1,117 @@
+.color,
+.type {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 101;
+    background: #f4f4f4;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.color>p,
+.type>p {
+    margin: .075rem 0;
+    font-size: .17rem;
+    color: #00afff;
+    background: #fff;
+    text-align: center;
+    line-height: .4rem;
+    height: .4rem;
+}
+
+.c-type {
+    margin-top: .075rem;
+    font-size: .15rem;
+    line-height: .38rem;
+    height: .38rem;
+    background: #fff;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.c-type span {
+    padding: 0 .22rem;
+}
+
+.color .c-type span.active,
+.type .c-type span.active {
+    color: #00afff;
+}
+
+.color ul {
+    margin-top: .075rem;
+    padding: 0 .1rem;
+    overflow: hidden;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.color ul li:nth-child(odd) {
+    margin-right: .1rem;
+}
+
+.color ul li {
+    float: left;
+    width: 46%;
+    font-size: .14rem;
+    border: 1px solid #3aacff;
+    box-sizing: border-box;
+    border-radius: .025rem;
+    padding: .1rem 0;
+    display: flex;
+    align-items: center;
+    margin: .1rem 0;
+}
+
+.color ul li span {
+    display: inline-block;
+    width: .2rem;
+    height: .2rem;
+    margin: 0 .1rem;
+    vertical-align: -6%;
+    box-sizing: border-box;
+    border: 1px solid #818181;
+}
+
+.type .shop-car-list div>p {
+    padding: 0 .1rem;
+    height: .25rem;
+    line-height: .25rem;
+    font-size: .14rem;
+    color: #999;
+    background: #f4f4f4;
+}
+
+.type .shop-car-list ul {
+    padding: 0 .1rem;
+    background: #fff;
+}
+
+.type .shop-car-list ul p:first-child {
+    padding: .13rem 0 .1rem;
+    font-size: .15rem;
+    color: #3d3d3d;
+}
+
+.type .shop-car-list ul p:nth-child(2) {
+    color: #bdbdbd;
+    font-size: .13rem;
+}
+
+.type .shop-car-list ul p:nth-child(3) {
+    text-align: right;
+    padding-bottom: .05rem;
+    font-size: .12rem;
+    color: #818181;
+}
+
+.type .shop-car-list ul p:nth-child(3) span:nth-child(2) {
+    font-size: .15rem;
+    color: #ff2336;
+    margin-left: .05rem;
+}
