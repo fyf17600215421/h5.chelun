@@ -31,7 +31,10 @@ const modulesImg = {
         SerialID: 0,
         ImageID: 0,
         PageCount: 0,
-        ColorID: 0
+        ColorID: 0,
+        ColorText: "color",
+        TypeText: "type",
+        CarTypeID: 0
     },
     mutations: {
         changeSerialID: (state, text) => {
@@ -45,10 +48,15 @@ const modulesImg = {
         },
         changeColorID: (state, text) => {
             state.ColorID = text;
+        },
+        changeCarTypeID: (state, text) => {
+            state.CarTypeID = text;
+        },
+        changeClassText: (state, { name, text }) => {
+            state[name] = text;
         }
     }
 }
-
 
 const modulesAskMinPrice = {
     state: {
@@ -60,8 +68,6 @@ const modulesAskMinPrice = {
         }
     }
 }
-
-
 
 export default new Vuex.Store({
     modules: {

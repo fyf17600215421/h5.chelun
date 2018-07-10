@@ -9,13 +9,15 @@ import "./css/common.css";
 import "./css/reset.css";
 import "./css/style.css";
 
+import Totals from "./components/totals"
+
 Vue.config.productionTip = false;
 import VueLazyLoad from 'vue-lazyload';
 Vue.use(VueLazyLoad, {
     error: '../static/erro.jpg',
     loading: '../static/loading.jpg'
 })
-
+Vue.use(Totals);
 new Vue({
     el: '#app',
     router,

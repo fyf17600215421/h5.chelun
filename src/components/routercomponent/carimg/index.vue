@@ -3,12 +3,12 @@
        <div class="flex-row tit">
             <span>
                 <router-link to="color">
-                    color
+                    {{ColorText}}^
                 </router-link>
            </span>
             <span>
                  <router-link to="type">
-                    Type
+                    {{TypeText}}
                 </router-link>
            </span>
           
@@ -62,39 +62,43 @@ export default {
             ImgId:null,
             IMGpage:1,
             maxLength:0,
-            showSwiper:false
+            showSwiper:false,
+            imgIndex:0
         }
     },
     components:{
         Imgswiper
     },
     mounted(){
-        console.log(this.SerialID,this.ColorID);
         this.changeSerialID(this.$route.query.id);
         let time = new Date().getTime();
         let Url ="https://baojia.chelun.com/v2-car-getImageList.html?SerialID="+this.SerialID+"&_"+time+"";
-        if(this.ColorID){
-         Url ="https://baojia.chelun.com/v2-car-getImageList.html?SerialID="+this.SerialID+"&ColorID="+this.ColorID+"&_"+time+"";
-          }
+        if(this.ColorID&&this.CarTypeID){
+                Url = `https://baojia.chelun.com/v2-car-getImageList.html?SerialID=${this.SerialID}&ColorID=${this.ColorID}&CarID=${this.CarTypeID}&_${time}`
+            }else if(this.CarTypeID){
+                Url = `https://baojia.chelun.com/v2-car-getImageList.html?SerialID=${this.SerialID}&CarID=${this.CarTypeID}&_${time}`
+            }else if(this.ColorID) {
+                Url = `https://baojia.chelun.com/v2-car-getImageList.html?SerialID=${this.SerialID}&ColorID=${this.ColorID}&_${time}`
+            }
         this.getList(Url,"list");
     },
     computed:{
        ...mapState({
            SerialID:state=>state.CarImg.SerialID,
            ImageID:state=>state.CarImg.ImageID,
-           ColorID:state=>state.CarImg.ColorID
+           ColorID:state=>state.CarImg.ColorID,
+           ColorText:state=>state.CarImg.ColorText,
+           CarTypeID:state=>state.CarImg.CarTypeID,
+           TypeText:state=>state.CarImg.TypeText
        })
     },
     watch:{
-        SerialID(){
-            console.log(this.SerialID);
-        },
-        IMGpage(){
-           this.changePageCount(this.IMGpage)
+        imgIndex(){
+           this.changePageCount(Math.ceil(this.imgIndex/30))
         }
     },
     methods:{
-        ...mapMutations(["changeSerialID","changeImageID","changePageCount","changeColorID"]),
+        ...mapMutations(["changeSerialID","changeImageID","changePageCount"]),
         //获取数据
         getList(URL,content){
             fetch(URL).then(res=>{
@@ -121,8 +125,12 @@ export default {
             this.key=false;
             let time = new Date().getTime();
             let URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${i}&PageSize=30&_${time}`
-            if(this.ColorID){
-                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ColorID=${this.ColorID}&ImageID=${this.ImageID}&Page=${i}&PageSize=30&_${time}`
+            if(this.ColorID&&this.CarTypeID){
+                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&CarID=${this.TypeText}&Page=${i}&PageSize=30&_${time}`
+            }else if(this.CarTypeID){
+                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&CarID=${this.TypeText}&Page=${i}&PageSize=30&_${time}`
+            }else if(this.ColorID) {
+                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&Page=${i}&PageSize=30&_${time}`
             }
             this.getList(URL,"moneyImgList")
         },
@@ -137,12 +145,10 @@ export default {
         checkLookImg(item,index){
             let id = item.Id || this.ImageID;
              this.changeImageID(id);
+             this.imgIndex=index;
             this.showSwiper={show:true,index}
         }
-    },
-    destroyed() {
-        this.changeColorID(0)
-    },
+    }
 }
 </script>
 

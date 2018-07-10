@@ -78,7 +78,7 @@ export default {
         }
     },
     methods:{
-        ...mapMutations(["changeAskMinPriceUrl"]),
+        ...mapMutations(["changeAskMinPriceUrl","changeColorID","changeCarTypeID","changeClassText"]),
         askMess(list){
             var str = list.BottomEntranceLink;
             var substr2  = str.match(/car\/(\S*)/);
@@ -127,6 +127,12 @@ export default {
            localStorage.shopCarList=JSON.stringify(this.shopCarList);
            localStorage.yearList=JSON.stringify(this.years);
         }
+    },
+    destroyed() {
+        this.changeColorID(0);
+        this.changeCarTypeID(0);
+        this.changeClassText({name:'ColorText',text:'color'});
+        this.changeClassText({name:'TypeText',text:'type'});
     }
 }
 </script>

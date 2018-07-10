@@ -1,6 +1,6 @@
 <template>
     <div class="type">
-        <p data-hover="hover"  @click="changTypeid(0)">全部类型</p>
+        <p data-hover="hover"  @click="changTypeid({car_id:0,car_name:'type'})">全部类型</p>
         <div class="shop-car-list">
             <p class="c-type">
                 <span  v-for="(item,index) in yearList" :key="index" @click="changeYear(index)" :class="{active:index===yearIndex}">
@@ -10,7 +10,7 @@
             <div v-for="(item,index) in typeList" :key="index">
                  <p>{{item.tit}}</p>
                  <ul>
-                     <li v-for="(value,key) in item.list" :key="key">
+                     <li v-for="(value,key) in item.list" :key="key"  @click="changTypeid(value)">
                          <p>{{value.car_name}}</p>
                          <p>{{value.horse_power+'马力'+value.gear_num+'档'}}</p>
                          <p>
@@ -44,14 +44,14 @@ export default {
         this.typeList=JSON.parse(localStorage.shopCarList);
     },
    methods:{
-       getData(){
-          console.log()
-       },
+       ...mapMutations(["changeClassText","changeCarTypeID"]),
        changeYear(index){
            this.yearIndex=index;
        },
-       changTypeid(){
-           this.$router.go(-1);
+       changTypeid(item){
+          this.changeCarTypeID(item.car_id);
+          this.changeClassText({name:'TypeText',text:item.car_name});
+          this.$router.go(-1);
        }
    },
    destroyed() {

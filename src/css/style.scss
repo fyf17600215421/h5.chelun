@@ -116,8 +116,9 @@
                     display: flex;
                     flex-direction: column;
                     .car-name {
+                        width: 1.6rem;
                         color: #4b4d50;
-                        font-size: .18rem;
+                        font-size: .17rem;
                         margin-top: .1rem;
                     }
                     .car-price {
@@ -189,7 +190,7 @@
                 background: #00afff;
                 color: #fff;
                 border: none;
-                padding: .08rem .6rem;
+                padding: .08rem .4rem;
                 letter-spacing: 4px;
                 border-radius: 6px;
             }

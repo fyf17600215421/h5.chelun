@@ -8,7 +8,6 @@
             </div>
         </div>
             <div class="swiper-pagination img-swiper-count">
-                
             </div>
   </div>
 </template>
@@ -24,27 +23,31 @@ export default {
         }
     },
     props:["showSwiper"],
+    mounted() {
+      this.getList();
+    },
     computed:{
         ...mapState({
             SerialID:state=>state.CarImg.SerialID,
             ImageID:state=>state.CarImg.ImageID,
-            PageCount:state=>state.CarImg.PageCount
+            PageCount:state=>state.CarImg.PageCount,
+            ColorID:state=>state.CarImg.ColorID
         }),
-        mounted() {
-            console.log(this.SerialID,this.ImageID)
-             this.getList()
-        },
     },
     watch:{
         showSwiper(){
-            if(this.showSwiper.show) this.getList();
+            if((localStorage.PageCount-0)!==this.PageCount) this.getList();
             this.mySwiper&&this.mySwiper.slideTo(this.showSwiper.index%30||0, 0, false);
+            localStorage.PageCount=this.PageCount;
         }
     },
     methods:{
         getList(){
             let time = new Date().getTime();
-                let URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${Math.ceil(this.showSwiper.index/30)}&PageSize=30&_${time}`
+            let URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${Math.ceil(this.showSwiper.index/30)||1}&PageSize=30&_${time}`
+            if(this.ColorID){
+                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${Math.ceil(this.showSwiper.index/30)||1}&ColorID=${this.ColorID}&PageSize=30&_${time}`
+            }
                 fetch(URL).then(res=>{
                     res.json().then(body=>{
                         this.list=body.data.List;
@@ -55,7 +58,6 @@ export default {
                             }else{
                               this.mySwiper.update(true)
                             }
-                           
                            localStorage.swiperImgId=this.ImageID;
                         })
                     })

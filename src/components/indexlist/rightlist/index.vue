@@ -9,7 +9,7 @@
                                     <img  :src="item.Picture" alt="">
                             </span>
                             <div class="text-box">
-                                 <span class="car-name nowrap">
+                                 <span class="car-name text-nobr" >
                                        {{item.AliasName}}
                                  </span>
                                  <span class="car-price">

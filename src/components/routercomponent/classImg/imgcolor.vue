@@ -1,6 +1,6 @@
 <template>
     <div class="color">
-        <p data-hover="hover"  @click="changeColorid(0)">全部颜色</p>
+        <p data-hover="hover"  @click="changeColorid({ColorId:0,Name:'color'})">全部颜色</p>
         <div>
             <p class="c-type">
                 <span  v-for="(item,key,index) in list" :key="index" @click="changeYear(index)" :class="{active:index===yearIndex}">
@@ -8,7 +8,7 @@
                 </span>
             </p>        
             <ul>
-                <li index="0"  data-hover="hover" v-for="(item,index) in colorList[yearIndex]" :key="index" :data-id="item.ColorId" @click="changeColorid(item.ColorId)">
+                <li index="0"  data-hover="hover" v-for="(item,index) in colorList[yearIndex]" :key="index" :data-id="item.ColorId" @click="changeColorid(item)">
                     <span :style="'background:'+item.Value+''"></span>
                     {{item.Name}}   
                 </li>
@@ -41,7 +41,7 @@ export default {
         })
     },
    methods:{
-       ...mapMutations(["changeColorID"]),
+       ...mapMutations(["changeColorID","changeClassText"]),
        getData(){
             let time = +new Date();
             let Url = "https://baojia.chelun.com/v2-car-getModelImageYearColor.html?SerialID="+this.SerialID+"&_"+time+"";
@@ -61,8 +61,10 @@ export default {
        changeYear(index){
            this.yearIndex=index;
        },
-       changeColorid(id){
-           this.changeColorID(id);
+       changeColorid(item){
+           console.log("122222222")
+           this.changeColorID(item.ColorId);
+           this.changeClassText({name:'ColorText',text:item.Name});
            this.$router.go(-1);
        }
    },

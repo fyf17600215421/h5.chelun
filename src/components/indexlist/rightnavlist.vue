@@ -5,7 +5,7 @@
                 {{item}}
             </li>
         </ul>
-    </div>    
+    </div>  
 </template>
 <script>
 import { mapState , mapMutations } from "vuex";
