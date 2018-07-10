@@ -70,16 +70,16 @@ export default {
         Imgswiper
     },
     mounted(){
-        this.changeSerialID(this.$route.query.id);
+        if(this.$route.query.id) this.changeSerialID(this.$route.query.id);
         let time = new Date().getTime();
         let Url ="https://baojia.chelun.com/v2-car-getImageList.html?SerialID="+this.SerialID+"&_"+time+"";
         if(this.ColorID&&this.CarTypeID){
                 Url = `https://baojia.chelun.com/v2-car-getImageList.html?SerialID=${this.SerialID}&ColorID=${this.ColorID}&CarID=${this.CarTypeID}&_${time}`
-            }else if(this.CarTypeID){
+        }else if(this.CarTypeID){
                 Url = `https://baojia.chelun.com/v2-car-getImageList.html?SerialID=${this.SerialID}&CarID=${this.CarTypeID}&_${time}`
-            }else if(this.ColorID) {
+        }else if(this.ColorID) {
                 Url = `https://baojia.chelun.com/v2-car-getImageList.html?SerialID=${this.SerialID}&ColorID=${this.ColorID}&_${time}`
-            }
+        }
         this.getList(Url,"list");
     },
     computed:{
@@ -126,9 +126,9 @@ export default {
             let time = new Date().getTime();
             let URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${i}&PageSize=30&_${time}`
             if(this.ColorID&&this.CarTypeID){
-                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&CarID=${this.TypeText}&Page=${i}&PageSize=30&_${time}`
+                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&CarID=${this.CarTypeID}&Page=${i}&PageSize=30&_${time}`
             }else if(this.CarTypeID){
-                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&CarID=${this.TypeText}&Page=${i}&PageSize=30&_${time}`
+                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&CarID=${this.CarTypeID}&Page=${i}&PageSize=30&_${time}`
             }else if(this.ColorID) {
                 URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&Page=${i}&PageSize=30&_${time}`
             }

@@ -1,16 +1,26 @@
 import Vue from "vue";
 import Vuex from "vuex";
-
 import createdLooger from "vuex/dist/logger";
+
+import { INDEX_LIST_URL } from "../api/request";
+import { IndexList } from "./utils";
+
 Vue.use(Vuex);
 
 const modulesIndex = {
     state: {
+        indexList: null,
+        rightNavList: null,
         scrollToItem: "B",
         rightListDialogUrl: null,
         rightListDialogShow: true
     },
     mutations: {
+        addIndexList: (state, payload) => {
+            state.indexList = payload.list;
+            state.rightNavList = payload.rightList;
+        },
+        //滚动至某个
         scrollTos(state, obj) {
             state.scrollToItem = obj.content;
         },
@@ -22,6 +32,19 @@ const modulesIndex = {
         //是否显示首页右侧栏的dialog框
         rightListDialogShowChange(state, obj) {
             state.rightListDialogShow = obj;
+        }
+    },
+    actions: {
+        getIndexList: ({ commit }, payload) => {
+            fetch(INDEX_LIST_URL).then(res => {
+                    res.json().then(res => {
+                        let data = IndexList(res.data);
+                        commit("addIndexList", data);
+                    })
+                })
+                .catch((err) => {
+                    if (err) throw err;
+                })
         }
     }
 }

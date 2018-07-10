@@ -62,7 +62,6 @@ export default {
            this.yearIndex=index;
        },
        changeColorid(item){
-           console.log("122222222")
            this.changeColorID(item.ColorId);
            this.changeClassText({name:'ColorText',text:item.Name});
            this.$router.go(-1);

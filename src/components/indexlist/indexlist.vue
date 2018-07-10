@@ -20,31 +20,23 @@
    </div>
 </template>
 <script>
-import { INDEX_LIST_URL } from "../../api/request.js";
-import { newData } from "./utils.js";
-import { mapState , mapMutations } from "vuex";
+import { mapState , mapMutations ,mapActions} from "vuex";
 import Rightnav from "./rightnavlist";
 import RightDialog from "./rightlist"
 export default {
     data(){
         return{
-            list:null,
-            rightList:null
+        
         }
     },
     mounted(){
-        fetch(INDEX_LIST_URL).then(res=>{
-           res.json().then(res=>{
-             newData(res.data,this);
-           })
-        })
-        .catch((err)=>{
-            if(err) throw err;
-        })
+        this.getIndexList()
     },
     computed:{
         ...mapState({
-           scrollToItem:state=>state.Index.scrollToItem
+           scrollToItem:state=>state.Index.scrollToItem,
+           list:state=>state.Index.indexList,
+           rightList:state=>state.Index.rightNavList     
         })
     },
     watch:{
@@ -53,6 +45,7 @@ export default {
         }
     },
     methods:{
+        ...mapActions(["getIndexList"]),
         ...mapMutations(["getRightDialog","rightListDialogShowChange"]),
         scrollto(indexList,that){
         indexList==="#" ? 

@@ -1,5 +1,5 @@
 //修改数据
-export const newData = (data, that) => {
+export const IndexList = (data) => {
     let bigdata = [],
         rightArr = ["#"];
     data.map((item, ind) => {
@@ -18,6 +18,8 @@ export const newData = (data, that) => {
         obj.list = list;
         bigdata.push(obj);
     })
-    that.list = bigdata;
-    that.rightList = rightArr;
+    return {
+        list: bigdata,
+        rightList: rightArr
+    }
 }
