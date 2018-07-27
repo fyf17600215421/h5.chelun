@@ -24,13 +24,14 @@ import { mapState , mapMutations ,mapActions} from "vuex";
 import Rightnav from "./rightnavlist";
 import RightDialog from "./rightlist"
 export default {
+    name:"index",
     data(){
         return{
         
         }
     },
     mounted(){
-        this.getIndexList()
+        this.getIndexList();
     },
     computed:{
         ...mapState({

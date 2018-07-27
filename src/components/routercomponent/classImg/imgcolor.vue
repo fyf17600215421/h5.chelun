@@ -27,7 +27,7 @@ export default {
             yearIndex:0
         }
     },
-    created() {
+    mounted () {
         if(localStorage.list&&localStorage.colorList){
             this.list=JSON.parse(localStorage.list);
             this.colorList=JSON.parse(localStorage.colorList);

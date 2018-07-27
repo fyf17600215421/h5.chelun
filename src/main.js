@@ -4,20 +4,23 @@ import Vue from 'vue';
 import App from './App';
 import router from './router';
 import store from "./vuex/store.js";
+import Fastclick from 'fastclick';
+import VueLazyLoad from 'vue-lazyload';
 
 import "./css/common.css";
 import "./css/reset.css";
 import "./css/style.css";
+import "../serviceWorker"
 
 import Totals from "./components/totals"
-
 Vue.config.productionTip = false;
-import VueLazyLoad from 'vue-lazyload';
 Vue.use(VueLazyLoad, {
     error: '../static/erro.jpg',
     loading: '../static/loading.jpg'
 })
 Vue.use(Totals);
+
+Fastclick.attach(document.body);
 new Vue({
     el: '#app',
     router,

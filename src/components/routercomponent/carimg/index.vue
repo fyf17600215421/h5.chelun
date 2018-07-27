@@ -70,16 +70,17 @@ export default {
         Imgswiper
     },
     mounted(){
-        if(this.$route.query.id) this.changeSerialID(this.$route.query.id);
+      if(this.$route.query.id) this.changeSerialID(this.$route.query.id);
         let time = new Date().getTime();
-        let Url ="https://baojia.chelun.com/v2-car-getImageList.html?SerialID="+this.SerialID+"&_"+time+"";
+        let UrlPayload ="SerialID="+this.SerialID+"&_"+time+"";
         if(this.ColorID&&this.CarTypeID){
-                Url = `https://baojia.chelun.com/v2-car-getImageList.html?SerialID=${this.SerialID}&ColorID=${this.ColorID}&CarID=${this.CarTypeID}&_${time}`
+                UrlPayload = `SerialID=${this.SerialID}&ColorID=${this.ColorID}&CarID=${this.CarTypeID}&_${time}`
         }else if(this.CarTypeID){
-                Url = `https://baojia.chelun.com/v2-car-getImageList.html?SerialID=${this.SerialID}&CarID=${this.CarTypeID}&_${time}`
+                UrlPayload = `SerialID=${this.SerialID}&CarID=${this.CarTypeID}&_${time}`
         }else if(this.ColorID) {
-                Url = `https://baojia.chelun.com/v2-car-getImageList.html?SerialID=${this.SerialID}&ColorID=${this.ColorID}&_${time}`
+                UrlPayload = `SerialID=${this.SerialID}&ColorID=${this.ColorID}&_${time}`
         }
+        let Url = "https://baojia.chelun.com/v2-car-getImageList.html?"+UrlPayload;
         this.getList(Url,"list");
     },
     computed:{
@@ -124,15 +125,16 @@ export default {
            } 
             this.key=false;
             let time = new Date().getTime();
-            let URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${i}&PageSize=30&_${time}`
+            let URLpayload = `SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${i}&PageSize=30&_${time}`
             if(this.ColorID&&this.CarTypeID){
-                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&CarID=${this.CarTypeID}&Page=${i}&PageSize=30&_${time}`
+                URLpayload = `SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&CarID=${this.CarTypeID}&Page=${i}&PageSize=30&_${time}`
             }else if(this.CarTypeID){
-                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&CarID=${this.CarTypeID}&Page=${i}&PageSize=30&_${time}`
+                URLpayload = `SerialID=${this.SerialID}&ImageID=${this.ImageID}&CarID=${this.CarTypeID}&Page=${i}&PageSize=30&_${time}`
             }else if(this.ColorID) {
-                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&Page=${i}&PageSize=30&_${time}`
+                URLpayload = `SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&Page=${i}&PageSize=30&_${time}`
             }
-            this.getList(URL,"moneyImgList")
+            let URL = "https://baojia.chelun.com/v2-car-getCategoryImageList.html?"+URLpayload;
+            this.getList(URL,"moneyImgList");
         },
         //触发下拉加载更多
         loadingmore(moneyImgList){

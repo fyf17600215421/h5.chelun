@@ -34,9 +34,14 @@ export default {
         }),
     },
     watch:{
+        /**
+         * PrevPageCount 上次进入swiper组件的page值
+         * PrevImgId  上次进入swiper组件的imgID值
+         */
         showSwiper(){
             let PrevPageCount = localStorage.PageCount-0,
                 PrevImgId= localStorage.ImgId-0;
+
             if(PrevPageCount!==this.PageCount||PrevImgId!==this.ImageID) this.getList();
             this.mySwiper&&this.mySwiper.slideTo(this.showSwiper.index%30||0, 0, false);
             localStorage.PageCount=this.PageCount;
@@ -46,14 +51,15 @@ export default {
     methods:{
         getList(){
             let time = new Date().getTime();
-            let URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${Math.ceil(this.showSwiper.index/30)||1}&PageSize=30&_${time}`
+            let payLoad = `SerialID=${this.SerialID}&ImageID=${this.ImageID}&Page=${Math.ceil(this.showSwiper.index/30)||1}&PageSize=30&_${time}`
            if(this.ColorID&&this.CarTypeID){
-                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&CarID=${this.TypeText}&Page=${Math.ceil(this.showSwiper.index/30)||1}&PageSize=30&_${time}`
+                payLoad = `SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&CarID=${this.TypeText}&Page=${Math.ceil(this.showSwiper.index/30)||1}&PageSize=30&_${time}`
             }else if(this.CarTypeID){
-                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&CarID=${this.TypeText}&Page=${Math.ceil(this.showSwiper.index/30)||1}&PageSize=30&_${time}`
+                payLoad = `SerialID=${this.SerialID}&ImageID=${this.ImageID}&CarID=${this.TypeText}&Page=${Math.ceil(this.showSwiper.index/30)||1}&PageSize=30&_${time}`
             }else if(this.ColorID) {
-                URL = `https://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&Page=${Math.ceil(this.showSwiper.index/30)||1}&PageSize=30&_${time}`
+                payLoad = `SerialID=${this.SerialID}&ImageID=${this.ImageID}&ColorID=${this.ColorID}&Page=${Math.ceil(this.showSwiper.index/30)||1}&PageSize=30&_${time}`
             }
+            let URL = "https://baojia.chelun.com/v2-car-getCategoryImageList.html?"+payLoad;
                 fetch(URL).then(res=>{
                     res.json().then(body=>{
                         this.list=body.data.List;

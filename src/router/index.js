@@ -14,28 +14,46 @@ export default new Router({
     routes: [{
             path: "/",
             name: "index",
-            component: Indexs
+            component: Indexs,
+            meta: {
+                keepAlive: true
+            }
         }, {
             path: "/content",
             name: "content",
-            component: Content
+            component: Content,
+            meta: {
+                keepAlive: false
+            }
         },
         {
             path: "/img",
             name: "img",
-            component: Img
+            component: Img,
+            meta: {
+                keepAlive: false
+            }
         }, {
             path: "/askminprice",
             name: "askminprice",
-            component: Askminprice
+            component: Askminprice,
+            meta: {
+                keepAlive: false
+            }
         }, {
             path: "/color",
             name: "color",
-            component: ImgColor
+            component: ImgColor,
+            meta: {
+                keepAlive: false
+            }
         }, {
             path: "/type",
             name: "type",
-            component: ImgType
+            component: ImgType,
+            meta: {
+                keepAlive: false
+            }
         }
     ]
 })

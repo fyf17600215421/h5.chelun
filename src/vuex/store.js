@@ -83,14 +83,32 @@ const modulesImg = {
 
 const modulesAskMinPrice = {
     state: {
-        url: ""
+        url: "",
+        name: "",
+        telphone: "",
+        doList: [],
+        listType: "all"
     },
     mutations: {
         changeAskMinPriceUrl: (state, text) => {
             state.url = text;
+        },
+        changeMessage: (state, text) => {
+            state[text.attribute] = text.content;
+        },
+        addDoList: (state, text) => {
+            state.doList.push(text);
+        },
+        overList: (state, text) => {
+            state.doList[text].over = true;
+        },
+        changeListType: (state, payload) => {
+            state.listType = payload;
         }
     }
 }
+
+const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
     modules: {
@@ -98,5 +116,6 @@ export default new Vuex.Store({
         CarImg: modulesImg,
         AskMinPrice: modulesAskMinPrice
     },
-    plugins: [createdLooger()]
+    strict: debug,
+    plugins: debug ? [createdLooger()] : []
 })
