@@ -68,6 +68,7 @@ import { mapState , mapMutations } from "vuex";
                     end=0;
                 dom.ontouchstart=(e)=>{
                     start=e.changedTouches[0].pageX;
+                    console.log(dom)
                 }
                 dom.ontouchend=(e)=>{
                  end=e.changedTouches[0].pageX;
