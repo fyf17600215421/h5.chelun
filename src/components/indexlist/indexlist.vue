@@ -59,17 +59,17 @@ export default {
                item_MasterID = item.MasterID,
                RightDialog=this.rightListDialogShow;
           if(!localStorage_MasterID||item_MasterID!=localStorage_MasterID){
-            localStorage.MasterID=item_MasterID;
-            return this.getRightDialog(item);
-          }else{
-              if(RightDialog){
-                   this.rightListDialogShowChange(false);
-              }
+             localStorage.MasterID=item_MasterID;
+             return this.getRightDialog(item);
           }
+          if(RightDialog){
+              this.rightListDialogShowChange(false);
+           }
        }
     },
     destroyed() {
         this.rightListDialogShowChange(true);
+        localStorage.MasterID=undefined;
     },
     components:{
         Rightnav,
